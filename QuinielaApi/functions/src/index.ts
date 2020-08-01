@@ -3,10 +3,11 @@ import * as cors from 'cors';
 import * as express from 'express';
 import * as admin from 'firebase-admin';
 //import { Resultado } from './models/resultado.interface';
+//import { Resultado } from './models/resultado.interface';
 //import * as bodyParser from 'body-parser';
 admin.initializeApp();
 const app = express();
-app.use(cors({ origin: true }));
+app.use(cors());
 const DB = admin.firestore();
 
 app.get('/Calendario', async (req, res) => {
@@ -26,20 +27,24 @@ app.get('/contar', async (req, res) => {
 });
  
 app.put("/GuardarResultados", async (req, res) => {
-    
+  let lista:any = [];
 
+    if(req != undefined){
+      //lista = req.body;
+      /* lista.array.forEach(async (element:Resultado) => {
+        await DB.collection('Resultdo').add(element);
+      }); */
+    }
 
 /* list.forEach(item=> {
 DB.collection('Calendario').add(item);
 
 });  */
 
-res.status(200).json(req.body); 
+res.status(200).json(lista); 
 });
 
-
-
-  app.put("/CargaInicial1", async (req, res) => {
+app.put("/CargaInicial1", async (req, res) => {
     /* const body = req.body;
     await admin.firestore().collection('Usuario').doc('Password').update(body);
     res.status(200).send() */
