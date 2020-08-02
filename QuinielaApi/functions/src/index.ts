@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import * as cors from 'cors';
 import * as express from 'express';
 import * as admin from 'firebase-admin';
-//import { Resultado } from './models/resultado.interface';
+import { Resultado } from './models/resultado.interface';
 //import { Resultado } from './models/resultado.interface';
 //import * as bodyParser from 'body-parser';
 admin.initializeApp();
@@ -27,13 +27,10 @@ app.get('/contar', async (req, res) => {
 });
  
 app.put("/GuardarResultados", async (req, res) => {
-  let lista:any = [];
-
-    if(req != undefined){
-      //lista = req.body;
-      /* lista.array.forEach(async (element:Resultado) => {
-        await DB.collection('Resultdo').add(element);
-      }); */
+    if(req.body != undefined){
+      req.body.forEach(async (element:Resultado) => {
+        DB.collection('Resultado').add(element);
+      }); 
     }
 
 /* list.forEach(item=> {
@@ -41,7 +38,7 @@ DB.collection('Calendario').add(item);
 
 });  */
 
-res.status(200).json(lista); 
+res.status(200); 
 });
 
 app.put("/CargaInicial1", async (req, res) => {
